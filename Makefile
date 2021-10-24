@@ -31,6 +31,7 @@ SERVICES = \
 	hwclock \
 	kmod-static-nodes \
 	loginready \
+	locale \
 	misc \
 	modules \
 	mount \
