@@ -92,8 +92,6 @@ install:
 	# default services
 	ln -sf ../loginready $(DESTDIR)$(DINITDIR)/boot.d/loginready
 	ln -sf ../misc $(DESTDIR)$(DINITDIR)/boot.d/misc
-	ln -sf ../mount $(DESTDIR)$(DINITDIR)/boot.d/mount
-	ln -sf ../setup $(DESTDIR)$(DINITDIR)/boot.d/setup
 	# config files
 	for conf in $(CONF_FILES); do \
 		install -m 644 config/$$conf $(DESTDIR)$(DINITDIR)/config; \
