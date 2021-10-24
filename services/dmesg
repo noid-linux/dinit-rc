@@ -1,4 +1,4 @@
 type      = scripted
-command   = /usr/lib/dinit.d/scripts/dmesg
+command   = /etc/dinit.d/scripts/dmesg
 restart   = false
 waits-for = loginready
