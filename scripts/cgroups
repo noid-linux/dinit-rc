@@ -1,12 +1,10 @@
 #!/bin/sh
 
-[ -r /etc/dinit.d/cgroups.conf ] && . /etc/dinit.d/cgroups.conf
+[ -r /etc/dinit.d/config/cgroups.conf ] && . /etc/dinit.d/config/groups.conf
 
 CGROUP_OPTS=nodev,noexec,nosuid
 
-if [ $CGROUP_CONTROLLERS = "none" ]; then
-    CGROUP_CONTROLLERS=""
-fi
+[ "$CGROUP_CONTROLLERS" = "none" ] && CGROUP_CONTROLLERS=""
 
 cgroup2_find_path() {
     if grep -qw cgroup2 /proc/filesystems; then
