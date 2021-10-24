@@ -8,6 +8,7 @@ depends-ms = tty3
 depends-ms = tty4
 depends-ms = tty5
 depends-ms = tty6
+logfile = /run/boot.log
 
 waits-for.d = boot.d
 waits-for = rclocal

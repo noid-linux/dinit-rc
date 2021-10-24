@@ -1,4 +1,4 @@
-type       = scripted
+type       = internal
 restart    = false
 waits-for  = root-rw
 waits-for  = cgroups

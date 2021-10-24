@@ -15,7 +15,8 @@ CONF_FILES = \
 	rc.local \
 	rc.shutdown
 
-SERVICEDIR = boot.d
+SERVICEDIR = boot.d \
+	mount.d
 
 SERVICES = \
 	binfmt \
@@ -45,6 +46,7 @@ SERVICES = \
 	sysusers \
 	tmpfiles-dev \
 	tmpfiles-setup \
+	tmpfs \
 	tty1 \
 	tty2 \
 	tty3 \
@@ -81,6 +83,9 @@ install:
 	install -d $(DESTDIR)$(DINITDIR)/config
 	install -d $(DESTDIR)$(DINITDIR)/scripts
 	install -d $(DESTDIR)$(DINITDIR)/boot.d
+	install -d $(DESTDIR)$(DINITDIR)/mount.d
+	# placeholder
+	touch $(DESTDIR)$(DINITDIR)/mount.d/.KEEP
 	# default services
 	ln -sf ../loginready $(DESTDIR)$(DINITDIR)/boot.d/loginready
 	ln -sf ../misc $(DESTDIR)$(DINITDIR)/boot.d/misc
