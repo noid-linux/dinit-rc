@@ -44,6 +44,7 @@ SERVICES = \
 	setup \
 	single \
 	swap \
+	sysctl \
 	sysusers \
 	tmpfiles-dev \
 	tmpfiles-setup \
