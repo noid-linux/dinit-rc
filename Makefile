@@ -64,6 +64,7 @@ SCRIPTS = \
 	cgroup-release-agent.sh \
 	cgroups \
 	cleanup \
+	dmesg \
 	hostname \
 	hwclock \
 	network \
