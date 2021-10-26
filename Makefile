@@ -89,9 +89,7 @@ install:
 	install -d $(DESTDIR)$(DINITDIR)/mount.d
 	# placeholder
 	touch $(DESTDIR)$(DINITDIR)/mount.d/.KEEP
-	# default services
-	ln -sf ../loginready $(DESTDIR)$(DINITDIR)/boot.d/loginready
-	ln -sf ../misc $(DESTDIR)$(DINITDIR)/boot.d/misc
+	touch $(DESTDIR)$(DINITDIR)/boot.d/.KEEP
 	# config files
 	for conf in $(CONF_FILES); do \
 		install -m 644 config/$$conf $(DESTDIR)$(DINITDIR)/config; \

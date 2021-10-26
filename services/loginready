@@ -1,4 +1,6 @@
-type      = internal
-restart   = false
-waits-for = setup
-waits-for = mount
+type        = internal
+restart     = false
+waits-for   = setup
+waits-for   = mount
+waits-for   = misc
+waits-for.d = boot.d
