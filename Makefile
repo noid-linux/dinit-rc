@@ -18,7 +18,8 @@ CONF_FILES = \
 	rc.shutdown
 
 SERVICEDIR = boot.d \
-	mount.d
+	mount.d \
+	getty.d
 
 SERVICES = \
 	binfmt \
@@ -76,6 +77,14 @@ SCRIPTS = \
 	random-seed \
 	vconsole
 
+TTY_SERVICES = \
+	tty1 \
+	tty2 \
+	tty3 \
+	tty4 \
+	tty5 \
+	tty6
+
 all:
 	@echo "Nothing to be done here."
 
@@ -89,6 +98,7 @@ install:
 	install -d $(DESTDIR)$(DINITDIR)/scripts
 	install -d $(DESTDIR)$(DINITDIR)/boot.d
 	install -d $(DESTDIR)$(DINITDIR)/mount.d
+	install -d $(DESTDIR)$(DINITDIR)/getty.d
 	install -d $(DESTDIR)$(LOCALSTATEDIR)/log/dinit
 	# placeholder
 	touch $(DESTDIR)$(DINITDIR)/mount.d/.KEEP
@@ -112,6 +122,10 @@ install:
 	# services
 	for srv in $(SERVICES); do \
 		install -m 644 services/$$srv $(DESTDIR)$(DINITDIR); \
+	done
+	# getty services
+	for srv in $(TTY_SERVICES); do \
+		ln -s ../$$srv $(DESTDIR)$(DINITDIR)/getty.d; \
 	done
 	# misc
 	install -Dm644 misc/50-default.conf $(DESTDIR)$(LIBDIR)/sysctl.d/50-default.conf
