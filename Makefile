@@ -28,6 +28,7 @@ SERVICES = \
 	cleanup \
 	dmesg \
 	fsck \
+	getty \
 	hostname \
 	hwclock \
 	kmod-static-nodes \
