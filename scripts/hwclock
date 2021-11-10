@@ -4,8 +4,8 @@
 HARDWARECLOCK=${HARDWARECLOCK:-UTC}
 
 case $HARDWARECLOCK in
-    UTC) HWCLOCK_PARAMS=" --utc" ;;
-    localtime) HWCLOCK_PARAMS=" --localtime" ;;
+    UTC) HWCLOCK_PARAMS="--utc" ;;
+    localtime) HWCLOCK_PARAMS="--localtime" ;;
     *) HWCLOCK_PARAMS="" ;;
 esac
 
