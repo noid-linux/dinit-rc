@@ -6,3 +6,4 @@ restart    = false
 depends-on = network-pre
 after      = pseudofs
 after      = net-lo
+after      = mount
