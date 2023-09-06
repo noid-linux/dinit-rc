@@ -89,11 +89,18 @@ TTY_SERVICES = \
 	tty5 \
 	tty6
 
-all:
-	@echo "Nothing to be done here."
+LOCALSTATEDIR ?= /var/lib
+CFLAGS ?= -O2 -pipe
+
+CFLAGS += -Wall -Wextra -pedantic
+CFLAGS += -DLOCALSTATEDIR="\"$(LOCALSTATEDIR)\""
+
+seedrng: bin/seedrng.c
+	cc -o bin/seedrng bin/seedrng.c $(CFLAGS)
 
 install:
 	install -d $(DESTDIR)$(BINDIR)
+	install -d $(DESTDIR)$(LIBDIR)
 	install -d $(DESTDIR)$(DATADIR)
 	install -d $(DESTDIR)$(SYSCONFDIR)
 	install -d $(DESTDIR)$(MANDIR)
@@ -134,5 +141,11 @@ install:
 		ln -s ../$$srv $(DESTDIR)$(DINITDIR)/getty.d; \
 	done
 	# misc
+	install -Dm755 bin/seedrng          $(DESTDIR)$(BINDIR)/seedrng
 	install -Dm644 misc/50-default.conf $(DESTDIR)$(LIBDIR)/sysctl.d/50-default.conf
 	install -Dm644 misc/dinit.logrotate $(DESTDIR)$(SYSCONFDIR)/logrotate.d/dinit
+
+clean:
+	rm -f bin/seedrng
+
+.PHONY: clean

@@ -1,6 +1,5 @@
 type         = scripted
-command      = /etc/dinit.d/scripts/random-seed load
-stop-command = /etc/dinit.d/scripts/random-seed save
+command      = /usr/bin/seedrng
 restart      = false
 after        = pseudofs
 after        = udev-settle
