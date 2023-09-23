@@ -1,5 +1,5 @@
 type      = scripted
-command   = /usr/bin/modules-load
+command   = /usr/lib/dinit/modules-load
 restart   = false
 after     = pseudofs
 waits-for = udev-settle
