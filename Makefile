@@ -67,7 +67,6 @@ SCRIPTS = \
 	agetty \
 	agetty-default \
 	binfmt \
-	cgroup-release-agent.sh \
 	cgroups \
 	cleanup \
 	dmesg \
