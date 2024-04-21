@@ -65,7 +65,6 @@ SERVICES = \
 SCRIPTS = \
 	agetty \
 	agetty-default \
-	binfmt \
 	cleanup \
 	dmesg \
 	fsck \

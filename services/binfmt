@@ -1,4 +1,4 @@
 type       = scripted
-command    = /usr/lib/dinit/binfmt
+command    = /usr/lib/artix/binfmt.sh
 depends-on = pseudofs
 restart    = false
