@@ -15,7 +15,6 @@ MANPAGES = modules-load.8
 CONF_FILES = \
 	agetty-default.conf \
 	console.conf \
-	cgroups.conf \
 	hwclock.conf \
 	rc.local \
 	rc.shutdown
@@ -67,7 +66,6 @@ SCRIPTS = \
 	agetty \
 	agetty-default \
 	binfmt \
-	cgroups \
 	cleanup \
 	dmesg \
 	fsck \

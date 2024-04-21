@@ -1,4 +1,4 @@
 type       = scripted
-command    = /usr/lib/dinit/cgroups
+command    = /usr/lib/artix/mount-cgroups
 restart    = false
 depends-on = pseudofs
