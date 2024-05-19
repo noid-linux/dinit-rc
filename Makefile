@@ -1,3 +1,4 @@
+CC            ?= cc
 PREFIX        ?= /usr
 SYSCONFDIR    ?= /etc
 LOCALSTATEDIR ?= /var
@@ -19,8 +20,7 @@ CONF_FILES = \
 	rc.local \
 	rc.shutdown
 
-SERVICEDIR = boot.d \
-	mount.d
+SERVICEDIR = boot.d
 
 SERVICES = \
 	binfmt \
@@ -29,6 +29,7 @@ SERVICES = \
 	cleanup \
 	dmesg \
 	fsck \
+	fsck-root \
 	getty \
 	hostname \
 	hwclock \
@@ -46,12 +47,14 @@ SERVICES = \
 	random-seed \
 	rclocal \
 	recovery \
+	root-ro \
 	root-rw \
 	setup \
 	single \
 	swap \
 	sysctl \
 	sysusers \
+	system \
 	tmpfiles-dev \
 	tmpfiles-setup \
 	tmpfs \
@@ -61,6 +64,22 @@ SERVICES = \
 	udev-trigger \
 	vconsole
 
+TARGETS = \
+	early-console.target \
+	early-devices.target \
+	early-fs-fstab.target \
+	early-fs-local.target \
+	early-fs-pre.target \
+	early-keyboard.target \
+	early-modules.target \
+	early-prepare.target \
+	early-root-rw.target \
+	local.target \
+	login.target \
+	network.target \
+	pre-local.target \
+	pre-network.target \
+	time-sync.target
 
 SCRIPTS = \
 	agetty \
@@ -89,7 +108,7 @@ CFLAGS += -Wall -Wextra -pedantic
 CFLAGS += -DLOCALSTATEDIR="\"$(LOCALSTATEDIR)\""
 
 seedrng: bin/seedrng.c
-	cc -o bin/seedrng bin/seedrng.c $(CFLAGS)
+	$(CC) -o bin/seedrng bin/seedrng.c $(CFLAGS)
 
 install:
 	install -d $(DESTDIR)$(BINDIR)
@@ -100,14 +119,11 @@ install:
 	install -d $(DESTDIR)$(DINITSRVDIR)
 	install -d $(DESTDIR)$(DINITCNFDIR)/config
 	install -d $(DESTDIR)$(LIBDIR)/dinit
+	install -d $(DESTDIR)$(DINITSRVDIR)/boot.d
 	install -d $(DESTDIR)$(DINITCNFDIR)/boot.d
-	install -d $(DESTDIR)$(DINITCNFDIR)/mount.d
-	install -d $(DESTDIR)$(DINITCNFDIR)/live.d
 	install -d $(DESTDIR)$(LOCALSTATEDIR)/log/dinit
 	# placeholder
-	touch $(DESTDIR)$(DINITCNFDIR)/mount.d/.KEEP
 	touch $(DESTDIR)$(DINITCNFDIR)/boot.d/.KEEP
-	touch $(DESTDIR)$(DINITCNFDIR)/live.d/.KEEP
 	# config files
 	for conf in $(CONF_FILES); do \
 		install -m 644 config/$$conf $(DESTDIR)$(DINITCNFDIR)/config; \
@@ -128,10 +144,19 @@ install:
 	for srv in $(SERVICES); do \
 		install -m 644 services/$$srv $(DESTDIR)$(DINITSRVDIR); \
 	done
+	# targets
+	for srv in $(TARGETS); do \
+		install -m 644 services/$$srv $(DESTDIR)$(DINITSRVDIR); \
+	done
 	# getty services
 	for srv in $(TTY_SERVICES); do \
 		install -m 644 services/$$srv $(DESTDIR)$(DINITCNFDIR); \
 	done
+	# install default service
+	ln -sf ../getty $(DESTDIR)$(DINITSRVDIR)/boot.d/getty
+	ln -sf ../udevd $(DESTDIR)$(DINITSRVDIR)/boot.d/udevd
+	# shutdown hook
+	install -Dm755 misc/shutdown-hook $(DESTDIR)$(LIBDIR)/dinit/shutdown-hook
 	# misc
 	install -Dm644 misc/50-default.conf $(DESTDIR)$(LIBDIR)/sysctl.d/50-default.conf
 	install -Dm644 misc/dinit.logrotate $(DESTDIR)$(SYSCONFDIR)/logrotate.d/dinit
