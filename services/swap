@@ -1,6 +1,3 @@
-type         = scripted
-command      = /sbin/swapon -a
-stop-command = /sbin/swapoff -a
-waits-for    = root-rw
-depends-on   = udevd
-after        = udev-settle
+type       = scripted
+command    = /sbin/swapon -a
+depends-on = early-fs-local.target

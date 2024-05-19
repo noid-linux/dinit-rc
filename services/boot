@@ -2,8 +2,5 @@
 
 type = internal
 
-depends-ms = getty
-
-waits-for   = rclocal
-waits-for   = loginready
+depends-on  = system
 waits-for.d = /etc/dinit.d/boot.d

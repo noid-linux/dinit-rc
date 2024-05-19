@@ -1,5 +1,5 @@
 type      = scripted
 command   = /usr/bin/sysctl --system
 restart   = false
-after     = udevd
-after     = mount-all
+after     = early-devices.target
+after     = early-fs-local.target

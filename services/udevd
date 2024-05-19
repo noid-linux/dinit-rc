@@ -1,7 +1,6 @@
 type            = process
 command         = /usr/lib/dinit/udevd
-before          = setup
-depends-on      = udevd-early
-depends-ms      = udev-settle
+depends-on      = early-devices.target
+before          = pre-local.target
 restart         = true
 smooth-recovery = true

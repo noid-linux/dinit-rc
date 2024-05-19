@@ -1,6 +1,6 @@
-type         = scripted
-command      = /usr/lib/dinit/seedrng
-restart      = false
-after        = pseudofs
-after        = udev-settle
-after        = root-rw
+type      = scripted
+command   = /usr/lib/dinit/seedrng
+restart   = false
+waits-for = early-modules.target
+after     = early-devices.target
+after     = early-root-rw.target

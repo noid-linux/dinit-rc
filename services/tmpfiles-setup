@@ -1,5 +1,5 @@
 type       = scripted
 command    = /usr/bin/etmpfiles --exclude-prefix=/dev --create --remove --boot
 restart    = false
-after      = udev-settle
-waits-for  = root-rw
+after      = early-fs-local.target
+after      = pre-local.target

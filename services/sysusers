@@ -1,4 +1,4 @@
 type      = scripted
 command   = /usr/bin/esysusers
 restart   = false
-after     = root-rw
+after     = early-root-rw.target
