@@ -1,0 +1,14 @@
+#!/bin/sh
+
+export PATH=/sbin:/bin:/usr/sbin:/usr/bin
+
+echo "Disabling swap"
+swapoff -a
+echo "Unmounting filesystems"
+umount -r -a -t nosysfs,noproc,nodevtmpfs,notmpfs
+echo "Remounting root read-only"
+mount -n -o remount,ro /
+echo "Syncing disks"
+sync
+
+# TODO: cryptsetup, LVM, external things
