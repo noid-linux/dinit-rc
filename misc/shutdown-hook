@@ -20,6 +20,8 @@ echo "Locking crypt devices"
 CRYPT=1 && /usr/lib/dinit/cryptsetup remaining stop
 
 echo "Disabling LVM"
+# Suppress FD warnings since we only do this on shutdown
+LVM_SUPPRESS_FD_WARNINGS=1
 [ -x /usr/bin/vgchange ] && vgchange -an
 
 echo "Locking remaining crypt devices"
