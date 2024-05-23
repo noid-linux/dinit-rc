@@ -8,6 +8,7 @@ DATADIR       ?= $(PREFIX)/share
 MANDIR        ?= $(DATADIR)/man/man8
 DINITSRVDIR   ?= $(LIBDIR)/dinit.d
 DINITCNFDIR   ?= $(SYSCONFDIR)/dinit.d
+SEEDRNGDIR    ?= $(LOCALSTATEDIR)/lib
 
 BIN_PROGRAMS = modules-load seedrng
 
@@ -101,11 +102,10 @@ TTY_SERVICES = \
 	tty5 \
 	tty6
 
-LOCALSTATEDIR ?= /var/lib
 CFLAGS ?= -O2 -pipe
 
 CFLAGS += -Wall -Wextra -pedantic
-CFLAGS += -DLOCALSTATEDIR="\"$(LOCALSTATEDIR)\""
+CFLAGS += -DLOCALSTATEDIR="\"$(SEEDRNGDIR)\""
 
 seedrng: bin/seedrng.c
 	$(CC) -o bin/seedrng bin/seedrng.c $(CFLAGS)
