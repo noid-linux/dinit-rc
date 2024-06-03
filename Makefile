@@ -91,6 +91,7 @@ SCRIPTS = \
 	hostname \
 	hwclock \
 	pseudofs \
+	tmpfiles \
 	udevd \
 	vconsole
 
