@@ -1,1 +1,2 @@
 bin/seedrng
+bin/dbus-wait-for
