@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# /etc/dinit.d/config/rc.local -- rc.local for Artix Linux
+# /etc/rc.local -- rc.local for Artix Linux
 #
 
 if [ -d /etc/local.d ]; then

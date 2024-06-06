@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# /etc/dinit.d/config/rc.shutdown -- rc.shutdown for Artix Linux
+# /etc/rc.shutdown -- rc.shutdown for Artix Linux
 #
 
 if [ -d /etc/local.d ]; then
