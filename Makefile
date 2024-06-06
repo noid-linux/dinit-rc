@@ -95,6 +95,7 @@ SCRIPTS = \
 	fsck \
 	hostname \
 	hwclock \
+	locale \
 	pseudofs \
 	tmpfiles \
 	udevd \
