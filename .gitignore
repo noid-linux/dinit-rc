@@ -1,2 +1,3 @@
 bin/seedrng
 bin/dbus-wait-for
+man/*.8

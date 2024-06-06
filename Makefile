@@ -109,9 +109,20 @@ CFLAGS ?= -O2 -pipe
 
 CFLAGS += -Wall -Wextra -pedantic
 
-all: bin/dbus-wait-for.c bin/seedrng.c
+all: bin man
+
+bin/dbus-wait-for: bin/dbus-wait-for.c
 	$(CC) -o bin/dbus-wait-for bin/dbus-wait-for.c $(CFLAGS) `pkg-config --libs --cflags dbus-1`
+
+bin/seedrng: bin/seedrng.c
 	$(CC) -o bin/seedrng bin/seedrng.c $(CFLAGS) -DLOCALSTATEDIR="\"$(SEEDRNGDIR)\""
+
+bin: bin/dbus-wait-for bin/seedrng
+
+man/modules-load.8: man/modules-load.8.scd
+	scdoc < $< > $@
+
+man: man/modules-load.8
 
 install:
 	install -d $(DESTDIR)$(BINDIR)
@@ -171,5 +182,6 @@ install:
 clean:
 	rm -f bin/seedrng
 	rm -f bin/dbus-wait-for
+	rm -f man/*.8
 
 .PHONY: all clean
