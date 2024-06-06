@@ -5,19 +5,22 @@ LOCALSTATEDIR ?= /var
 BINDIR        ?= $(PREFIX)/bin
 LIBDIR        ?= $(PREFIX)/lib
 DATADIR       ?= $(PREFIX)/share
-MANDIR        ?= $(DATADIR)/man/man8
+MANDIR        ?= $(DATADIR)/man
 DINITSRVDIR   ?= $(LIBDIR)/dinit.d
 DINITCNFDIR   ?= $(SYSCONFDIR)/dinit.d
 SEEDRNGDIR    ?= $(LOCALSTATEDIR)/lib
 
 BIN_PROGRAMS = modules-load dbus-wait-for seedrng
 
-MANPAGES = locale.conf.5 modules-load.8
+MAN5 = locale.conf.5 vconsole.conf.5
+MAN8 = modules-load.8
 
 BOOTCONF_FILES = \
 	hwclock.conf \
+	locale.conf \
 	rc.local \
-	rc.shutdown
+	rc.shutdown \
+	vconsole.conf
 
 CONF_FILES = \
 	console.conf \
@@ -126,7 +129,10 @@ man/modules-load.8: man/modules-load.8.scd
 man/locale.conf.5: man/locale.conf.5.scd
 	scdoc < $< > $@
 
-man: man/locale.conf.5 man/modules-load.8
+man/vconsole.conf.5: man/vconsole.conf.5.scd
+	scdoc < $< > $@
+
+man: man/locale.conf.5 man/vconsole.conf.5 man/modules-load.8
 
 install:
 	install -d $(DESTDIR)$(BINDIR)
@@ -158,8 +164,11 @@ install:
 		install -m 755 bin/$$prog $(DESTDIR)$(LIBDIR)/dinit; \
 	done
 	# manpages
-	for man in $(MANPAGES); do \
-		install -m 644 man/$$man $(DESTDIR)$(MANDIR); \
+	for man in $(MAN5); do \
+		install -Dm644 man/$$man $(DESTDIR)$(MANDIR)/man5/$$man; \
+	done
+	for man in $(MAN8); do \
+		install -Dm644 man/$$man $(DESTDIR)$(MANDIR)/man8/$$man; \
 	done
 	# services
 	for srv in $(SERVICES); do \

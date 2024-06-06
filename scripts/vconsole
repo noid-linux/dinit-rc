@@ -1,6 +1,18 @@
 #!/bin/sh
 [ -r /etc/vconsole.conf ] && . /etc/vconsole.conf
 
+# Override the variables if defined in cmdline, mimic systemd's behavior.
+if [ -r /proc/cmdline ]; then
+    for x in $(cat /proc/cmdline); do
+        case "$x" in
+            vconsole.keymap=*)      KEYMAP="${KEYMAP}"           ;;
+            vconsole.font=*)        FONT="${FONT}"               ;;
+            vconsole.font_map=*)    FONT_MAP="${FONT_MAP}"       ;;
+            vconsole.font_unimap=*) FONT_UNIMAP="${FONT_UNIMAP}" ;;
+        esac
+    done
+fi
+
 case "$2" in
     "keyboard") [ -n "$KEYMAP" ] && loadkeys -q -u "${KEYMAP}" ;;
     "console")
