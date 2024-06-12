@@ -14,7 +14,7 @@ if [ -r /proc/cmdline ]; then
 fi
 
 case "$1" in
-    "keyboard") [ -n "$KEYMAP" ] && loadkeys -q -u "${KEYMAP}" ;;
+    "keyboard") [ -n "$KEYMAP" ] && loadkeys -q -u "${KEYMAP}" || : ;;
     "console")
         TTYS=${TTYS:-6}
         _index=0
