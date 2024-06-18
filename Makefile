@@ -184,6 +184,7 @@ install:
 	install -Dm755 misc/01-dinit-env.sh $(DESTDIR)$(SYSCONFDIR)/X11/xinit/xinitrc.d/01-dinit-env.sh
 	install -Dm644 misc/50-default.conf $(DESTDIR)$(LIBDIR)/sysctl.d/50-default.conf
 	install -Dm644 misc/dinit.logrotate $(DESTDIR)$(SYSCONFDIR)/logrotate.d/dinit
+	install -Dm644 misc/dinit-rc.tmpfiles $(DESTDIR)$(LIBDIR)/tmpfiles.d/dinit-rc.conf
 
 clean:
 	rm -f bin/seedrng
