@@ -7,6 +7,8 @@
 # The terms are the same between this repo and the OpenRC repo, see ../COPYING
 # file for details.
 
+[ -r /etc/dinit.d/config/network-online.conf ] && . /etc/dinit.d/config/network-online.conf
+
 get_interfaces() {
     for ifname in /sys/class/net/*; do
         [ -h "${ifname}" ] || continue
@@ -15,7 +17,7 @@ get_interfaces() {
     done
 }
 
-interfaces=${interfaces:-$(get_interfaces)}
+interfaces=${INTERFACES:-$(get_interfaces)}
 # Timeout should be handled by dinit direcly
 # Failure to break from loop = offline
 while true; do
@@ -34,3 +36,17 @@ while true; do
     [ $configured -eq $ifcount ] && [ $carriers -ge 1 ] && break
     sleep 1
 done
+
+if [ "$PINGTEST" ]; then
+    # Cloudflare is chosen because it's probably one of the most resilient
+    # networks out there. If people don't like it, they can switch using PINGHOST.
+    # Either way, it's opt-in.
+    ping_host="${PINGHOST:-1.1.1.1}"
+    if [ "$ping_host" ]; then
+        while true; do
+            ping -c 1 $ping_host >/dev/null 2>&1
+            [ $? = 0 ] && break
+            sleep 1
+        done
+    fi
+fi
