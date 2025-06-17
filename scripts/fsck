@@ -1,6 +1,6 @@
 #!/bin/sh
 # From Chimera Linux's dinit fsck service
-# Copyright (C) 2021 Daniel "q66" Kolesa
+# Copyright (C) 2021 q66
 # For terms, see COPYING file at main directory
 
 command -v fsck > /dev/null 2>&1 || exit 0
