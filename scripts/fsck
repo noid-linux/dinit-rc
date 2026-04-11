@@ -3,6 +3,9 @@
 # Copyright (C) 2021 q66
 # For terms, see COPYING file at main directory
 
+# TODO: find a less stupid way to deal with overlay fs
+findmnt -n -o FSTYPE / | grep -q overlay && exit 0
+
 command -v fsck > /dev/null 2>&1 || exit 0
 
 FORCEARG=

@@ -77,6 +77,7 @@ SCRIPTS = \
 	cgroups	\
 	cleanup \
 	dmesg \
+	early-root-rw \
 	fsck \
 	hostname \
 	hwclock \
@@ -84,6 +85,7 @@ SCRIPTS = \
 	net-online \
 	pseudofs \
 	rclocal \
+	root-ro \
 	udevd \
 	udev-trigger \
 	vconsole
