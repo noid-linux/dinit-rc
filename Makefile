@@ -27,6 +27,7 @@ SERVICES = \
 	boot \
 	cgroups \
 	cleanup \
+	crypttab \
 	dmesg \
 	fsck \
 	fsck-root \
@@ -76,6 +77,7 @@ SCRIPTS = \
 	agetty-default \
 	cgroups	\
 	cleanup \
+	crypttab \
 	dmesg \
 	early-root-rw \
 	fsck \
@@ -182,6 +184,7 @@ install:
 	install -Dm644 misc/50-default.conf $(DESTDIR)$(LIBDIR)/sysctl.d/50-default.conf
 	install -Dm644 misc/dinit.logrotate $(DESTDIR)$(SYSCONFDIR)/logrotate.d/dinit
 	install -Dm644 misc/dinit-rc.tmpfiles $(DESTDIR)$(LIBDIR)/tmpfiles.d/dinit-rc.conf
+	install -Dm644 misc/crypt.awk $(DESTDIR)$(DINITSRVDIR)/crypt.awk
 
 clean:
 	rm -f bin/seedrng
