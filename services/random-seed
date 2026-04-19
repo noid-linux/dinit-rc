@@ -1,5 +1,6 @@
 type         = scripted
 command      = /usr/lib/dinit/seedrng
+env-file	 = /etc/dinit.d/config/seedrng.conf
 stop-command = /usr/lib/dinit/seedrng
 restart      = false
 waits-for    = early-modules.target

@@ -18,7 +18,8 @@ MAN8 = modules-load.8
 CONF_FILES = \
 	console.conf \
 	agetty-default.conf \
-	network-online.conf
+	network-online.conf \
+	seedrng.conf
 
 SERVICEDIR = boot.d
 
