@@ -50,7 +50,6 @@ SERVICES = \
 	swap \
 	sysctl \
 	system \
-	tmpfs \
 	udevd \
 	udevd-early \
 	udev-settle \
